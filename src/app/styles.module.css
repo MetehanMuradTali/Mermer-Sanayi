@@ -1,0 +1,172 @@
+.main {
+    --bs-gutter-x: 0;
+}
+
+.nav-active {
+    background-color: #090088;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    transition: 0.6s ease-in-out;
+    z-index: 10;
+}
+
+.nav-hidden {
+    background-color: #090088;
+    position: fixed;
+    width: 100%;
+    top: -150px;
+}
+
+
+.nav-input {
+    display: inline;
+    width: auto;
+    border-radius: var(--bs-border-radius-lg);
+}
+
+.nav-width {
+    width: auto;
+}
+
+.footer-active {
+    background-color: #090088;
+    position: fixed;
+    width: 100%;
+    height: 10%;
+    bottom: 0px;
+    transition: .6s linear;
+    z-index: 10;
+}
+
+.footer-hidden {
+    background-color: #090088;
+    position: fixed;
+    width: 100%;
+    bottom: -120px;
+}
+
+.card-container {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.hover-card {
+    transition: transform 300ms;
+    display: flex;
+    align-items: center;
+}
+
+.hover-card:hover {
+    transform: scale(1.05);
+}
+
+.responsive-text {
+    font-size: 1.5rem;
+    /* Varsayılan boyut */
+}
+
+.card-text {
+    font-size: 1.4rem;
+    /* Varsayılan boyut */
+}
+
+.card-price-text {
+    font-size: 1.2rem;
+    /* Varsayılan boyut */
+}
+
+
+.responsive-img {
+    max-width: 100%;
+    /* Görüntünün konteynerin genişliğini aşmasını engeller */
+    height: auto;
+    /* Görüntünün orantılı olarak küçülmesini sağlar */
+}
+
+@media (min-width: 200px) {
+    .responsive-text {
+        font-size: 0.5rem;
+        /* sm ve üzeri için */
+    }
+
+    .card-text {
+        font-size: 1rem;
+        /* Varsayılan boyut */
+    }
+
+    .card-price-text {
+        font-size: 0.8rem;
+        /* Varsayılan boyut */
+    }
+
+    .responsive-img {
+        width: 16px;
+        /* Küçük ekranlar için genişliği ayarlayın */
+        height: 16px;
+    }
+}
+
+@media (min-width: 576px) {
+    .responsive-text {
+        font-size: 0.75rem;
+        /* sm ve üzeri için */
+    }
+
+    .responsive-img {
+        width: 20px;
+        /* Küçük ekranlar için genişliği ayarlayın */
+        height: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .responsive-text {
+        font-size: 1rem;
+        /* md ve üzeri için */
+    }
+
+    .responsive-img {
+        width: 24px;
+        /* Küçük ekranlar için genişliği ayarlayın */
+        height: 24px;
+    }
+}
+
+@media (min-width: 992px) {
+    .responsive-text {
+        font-size: 1.25rem;
+        /* lg ve üzeri için */
+    }
+
+    .card-text {
+        font-size: 1.25rem;
+        /* Varsayılan boyut */
+    }
+
+    .card-price-text {
+        font-size: 1rem;
+        /* Varsayılan boyut */
+    }
+
+    .responsive-img {
+        width: 28px;
+        /* Küçük ekranlar için genişliği ayarlayın */
+        height: 28px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .responsive-img {
+        width: 28px;
+        /* Küçük ekranlar için genişliği ayarlayın */
+        height: 28px;
+    }
+}
