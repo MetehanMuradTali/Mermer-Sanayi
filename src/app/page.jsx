@@ -82,6 +82,14 @@ export default function Home() {
                         <span className={`${styles["nav-header-subheader"]}`}>Karabük'ün En Güvenilir Mermercisi</span>
                     </div>
 
+                    <button
+                        type="button"
+                        className={`btn btn-sm btn-primary ${styles["collapse"]} `}
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        Menü
+                    </button>
+
                 </div>
                 <div style={
                     isOpen && windowWidth < 1200 ? { display: "block" } :
@@ -118,14 +126,6 @@ export default function Home() {
                     </a>
 
                 </div>
-
-                <button
-                    type="button"
-                    className={`btn btn-sm btn-primary mb-3 ${styles["collapse"]} `}
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    Menü
-                </button>
             </nav>
 
 
