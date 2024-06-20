@@ -29,7 +29,7 @@ export default function ImageModal({ imgSrc, isOpen, onRequestClose }) {
             ariaHideApp={false}
         >
             <button onClick={onRequestClose} style={{ float: 'right' }}>Close</button>
-            <img src={imgSrc} alt="Enlarged view" style={{ maxWidth: '100%', maxHeight: '80vh' }} />
+            <img src={imgSrc} alt="Enlarged view" style={{ maxWidth: '90vw', maxHeight: '70vh' }} />
         </Modal>
     );
 };
