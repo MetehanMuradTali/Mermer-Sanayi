@@ -3,31 +3,108 @@
 }
 
 .nav-active {
-    background-color: #090088;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.7rem;
+    background-color: lightblue;
+    top: 0;
+    z-index: 10;
     position: fixed;
     width: 100%;
-    top: 0px;
     transition: 0.6s ease-in-out;
-    z-index: 10;
+    min-width: 420px;
 }
 
 .nav-hidden {
-    background-color: #090088;
-    position: fixed;
     width: 100%;
-    top: -150px;
+    top: -37%;
+
 }
 
-
-.nav-input {
-    display: inline;
-    width: auto;
-    border-radius: var(--bs-border-radius-lg);
+.nav-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.2rem;
 }
 
-.nav-width {
-    width: auto;
+.nav-header-name {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+
 }
+
+.nav-middle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+
+}
+
+.nav-last {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.2rem;
+
+}
+
+.nav-last {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.nav-last-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+.collapse {
+    display: none;
+}
+
+@media (min-width: 100px) {
+    .collapse {
+        display: block;
+    }
+
+    .nav-active {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        transition: 0.6s ease-in-out;
+
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    .collapse {
+        display: none;
+    }
+
+    .nav-active {
+        flex-direction: row;
+        justify-content: space-around;
+
+    }
+
+}
+
+/*nav end*/
 
 .footer-active {
     background-color: #090088;
@@ -43,7 +120,7 @@
     background-color: #090088;
     position: fixed;
     width: 100%;
-    bottom: -120px;
+    bottom: -35%;
 }
 
 .card-container {
@@ -89,6 +166,8 @@
     height: auto;
     /* Görüntünün orantılı olarak küçülmesini sağlar */
 }
+
+
 
 @media (min-width: 200px) {
     .responsive-text {
@@ -160,6 +239,7 @@
         /* Küçük ekranlar için genişliği ayarlayın */
         height: 28px;
     }
+
 }
 
 @media (min-width: 1200px) {
@@ -169,4 +249,5 @@
         /* Küçük ekranlar için genişliği ayarlayın */
         height: 28px;
     }
+
 }

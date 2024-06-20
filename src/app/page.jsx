@@ -9,6 +9,7 @@ export default function Home() {
     const [data, setData] = useState([]);
     const [show, setShow] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const controlNavbar = () => {
         if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
@@ -29,6 +30,20 @@ export default function Home() {
         };
     }, [lastScrollY]);
 
+
+    const [isOpen, setIsOpen] = useState(false);
+
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const load = () => {
         fetch('/csv/mezarlar.csv')
             .then(response => response.text())
@@ -45,7 +60,6 @@ export default function Home() {
             })
             .catch(error => console.error('Error fetching the CSV file:', error));
     };
-
     useEffect(() => {
         load();
     }, []); // Boş bağımlılık dizisi ile sadece bir kez çalıştırılır
@@ -53,57 +67,70 @@ export default function Home() {
     return (
         <main style={{ position: 'absolute' }} className='gx-0'>
 
-            {/*Navbar*/}
-            <nav className={`navbar navbar-expand-xl navbar-dark ${styles['nav-active']} ${show && styles['nav-hidden']}`}>
-                <div className={`container-fluid ${styles['nav-width']}`}>
+            <nav className={` ${styles['nav-active']} ${show && styles['nav-hidden']}`}>
+                <div className={`${styles["nav-header"]} `}>
                     <Image
                         src="/images/logo.png"
                         width={100}
-                        height={50}
+                        height={54}
                         alt="Logo"
-                        className='ms-5 me-1'
                     />
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
 
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mx-2 mb-2 mb-xl-0">
-                            <li className="nav-item active">
-                                <span className='text-white' style={{ fontSize: '24px', fontWeight: 'bold', display: 'block', width: '100%' }}>Ramazan Mermer Sanayi</span>
-                                <span className='text-white' style={{ fontSize: '15px', fontStyle: 'italic', display: 'block', width: '100%' }}>Karabük'ün En Güvenilir Mermercisi</span>
-                            </li>
-                        </ul>
-                        <div className="d-flex flex-column flex-xl-row my-2 mx-4 w-100">
-                            <form className='container-fluid d-flex mb-2 mb-xl-0'>
-                                <input className={`form-control mx-1 ${styles['nav-input']}`} type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-light" type="submit">Search</button>
-                            </form>
-                            <ul className="navbar-nav mx-2 flex-column flex-xl-row">
-                                <li className="nav-item active d-flex flex-column flex-xl-row">
-                                    <span className='text-white me-xl-3 mb-2 mb-xl-0'>Anasayfa</span>
-                                    <span className='text-white me-xl-3 mb-2 mb-xl-0'>Mezar Fiyat ve Modelleri</span>
-                                    <span className='text-white mb-2 mb-xl-0'>İletişim</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className='d-flex flex-column flex-xl-row'>
-                            <a className='me-3 text-white mb-2 mb-xl-0' style={{ textDecoration: "none" }} href=''>
-                                <span>Facebook</span>
-                                <img src="/icons/facebook.svg" width="32" height="32" alt='facebook' />
-                            </a>
-                            <a className='me-3 text-white mb-2 mb-xl-0' style={{ textDecoration: "none" }} href=''>
-                                <span>İnstagram</span>
-                                <img src="/icons/instagram.svg" width="32" height="32" alt='instagram' />
-                            </a>
-                            <a className='me-3 text-white' style={{ textDecoration: "none" }} href=''>
-                                <span>Whatsapp</span>
-                                <img src="/icons/whatsapp.svg" width="32" height="32" alt='whatsapp' />
-                            </a>
-                        </div>
+                    <div className={`${styles["nav-header-name"]}`}>
+                        <span className='text-white' style={{ fontSize: '24px', fontWeight: 'bold', display: 'block', width: '100%' }}>Ramazan Mermer Sanayi</span>
+                        <span className='text-white' style={{ fontSize: '15px', fontStyle: 'italic', display: 'block', width: '100%' }}>Karabük'ün En Güvenilir Mermercisi</span>
+                    </div>
+
+                </div>
+                <div style={
+                    isOpen && windowWidth < 1200 ? { display: "block" } :
+                        !isOpen && windowWidth >= 1200 ? { display: "block" } :
+                            !isOpen && windowWidth < 1200 ? { display: "none" } :
+                                { display: "block" }} >
+                    <form className='container-fluid d-flex mb-2 mb-xl-0'>
+                        <input className={`form-control mx-1 ${styles['nav-input']}`} type="search" placeholder="Search" aria-label="Search" />
+                        <button className="btn btn-light" type="submit">Search</button>
+                    </form>
+                    <div className={`${styles["nav-middle"]}`}>
+                        <span>Anasayfa</span>
+                        <span>Mezar Fiyat ve Modelleri</span>
+                        <span>İletişim</span>
                     </div>
                 </div>
+                <div className={`${styles["nav-last"]}`}
+                    style={
+                        isOpen && windowWidth < 1200 ? { display: "flex" } :
+                            !isOpen && windowWidth >= 1200 ? { display: "flex" } :
+                                !isOpen && windowWidth < 1200 ? { display: "none" } :
+                                    { display: "flex" }} >
+                    <a className={`${styles["nav-last-link"]}`}>
+                        <span style={{ color: 'blue' }}>Facebook</span>
+                        <img src="/icons/facebook.svg" width="32" height="32" alt='facebook' />
+                    </a>
+                    <a className={`${styles["nav-last-link"]}`}>
+                        <span style={{ color: 'orange' }}>İnstagram</span>
+                        <img src="/icons/instagram.svg" width="32" height="32" alt='instagram' />
+                    </a>
+                    <a className={`${styles["nav-last-link"]}`}>
+                        <span style={{ color: 'green' }}>Whatsapp</span>
+                        <img src="/icons/whatsapp.svg" width="32" height="32" alt='whatsapp' />
+                    </a>
+
+                </div>
+
+                <button
+                    type="button"
+                    className={`btn btn-primary mb-3 ${styles["collapse"]} `}
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    Çökebilir Menüyü Aç/Kapat
+                </button>
             </nav>
+
+
+
+
+
 
             {/*Giriş*/}
             <div className='d-flex flex-column bg-primary  align-items-center' style={{ paddingTop: "65px", width: "100%", height: "60%" }}>
@@ -215,5 +242,6 @@ export default function Home() {
                 />
             </footer>
         </main >
+
     )
 }
