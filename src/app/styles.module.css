@@ -1,6 +1,7 @@
 .main {
     position: absolute;
-    background-color: #bdcdff;
+    background-image: url("../../public/images/background.jpg");
+    background-size: cover;
 }
 
 .nav-active {
@@ -8,7 +9,8 @@
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
-    background-color: #9eb6ff;
+    background-image: url("../../public/svg/cubuk.svg");
+    background-size: cover;
     top: 0;
     z-index: 10;
     position: fixed;
@@ -88,6 +90,16 @@
     text-decoration: none;
 }
 
+.introduction {
+    width: 100vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-right: 1%;
+    padding-top: 7vh;
+}
+
+
 .collapse {
     display: none;
     margin-left: 10px;
@@ -125,7 +137,8 @@
 /*nav end*/
 
 .footer-active {
-    background-color: #090088;
+    background-image: url("../../public/svg/cubuk.svg");
+    background-size: cover;
     position: fixed;
     width: 100%;
     height: 10%;
@@ -135,7 +148,6 @@
 }
 
 .footer-hidden {
-    background-color: #090088;
     position: fixed;
     width: 100%;
     bottom: -35%;
@@ -149,7 +161,6 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 40px;
     perspective: 900px;
 }
 
@@ -173,13 +184,13 @@
 }
 
 .hover-card:hover {
-    transform: rotateX(3deg) translateY(-5px) translateZ(2px);
+    transform: scaley(1.05);
 }
 
 .responsive-text {
     font-size: 1.5rem;
     /* Varsayılan boyut */
-    color: whitesmoke;
+    color: #2C5B99;
 
 }
 
@@ -201,13 +212,14 @@
     /* Görüntünün konteynerin genişliğini aşmasını engeller */
     height: auto;
     /* Görüntünün orantılı olarak küçülmesini sağlar */
+    fill: blue;
 }
 
 
 
 @media (min-width: 200px) {
     .responsive-text {
-        font-size: 0.5rem;
+        font-size: 0.7rem;
         /* sm ve üzeri için */
     }
 

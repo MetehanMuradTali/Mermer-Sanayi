@@ -3,6 +3,8 @@ import Image from 'next/image'
 import styles from './styles.module.css'
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
+import ImageModal from '@/components/ImageModal';
+import Modal from 'react-modal';
 
 export default function Home() {
 
@@ -10,6 +12,19 @@ export default function Home() {
     const [show, setShow] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [windowWidth, setWindowWidth] = useState(0);
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [currentImage, setCurrentImage] = useState(null);
+
+    const openModal = (imageSrc) => {
+        setCurrentImage(imageSrc);
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setCurrentImage(null);
+        setModalIsOpen(false);
+    };
 
     const controlNavbar = () => {
         if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
@@ -64,6 +79,10 @@ export default function Home() {
     useEffect(() => {
         load();
     }, []); // Boş bağımlılık dizisi ile sadece bir kez çalıştırılır
+
+    useEffect(() => {
+        Modal.setAppElement('body');
+    }, []);
 
     return (
         <main className={`gx-0 ${styles["main"]}`} style={{ position: 'absolute' }}>
@@ -129,30 +148,35 @@ export default function Home() {
             </nav>
 
             {/*Giriş*/}
-            <div className='d-flex flex-column align-items-center' style={{ width: "100%", height: "60%" }}>
-                <div style={{ width: "100%", height: "100%", position: "relative", display: "flex", justifyContent: "center", paddingRight: "1%" }}>
+            <div className='d-flex flex-column align-items-center' style={{ width: "100%", height: "100%" }} >
+                <div className={styles["introduction"]} style={windowWidth < 600 ? { height: "40vh" } : { height: "70vh" }}>
                     <Image
-                        src="/images/kapak.png"
+                        src="/images/dukkan.jpg"
                         alt="kapak"
+                        sizes="50%"
+                        style={{
+                            width: '100%',
+                            height: "auto"
+                        }}
+                        width={500}
+                        height={300}
                         quality={100}
+                    />
+                </div>
+
+                <div className='my-1' style={{ textAlign: 'center' }}>
+                    <Image src="/icons/location.svg" className={styles["responsive-img"]} width={32} height={32} alt='location' />
+                    <span className={`${styles['responsive-text']}`} > Ömer Çolakoğlu Cad. R-Blok:2, 78600 Karıt/Safranbolu/Karabük</span>
+                </div>
+                <div style={{ width: "90%", height: "30%" }}>
+                    <Image
+                        src="/svg/turler.svg"
+                        layout='responsive'
                         sizes="100vw"
                         style={{
                             width: '100%',
                             height: 'auto',
                         }}
-                        width={500}
-                        height={300}
-                    />
-                </div>
-
-                <div className='my-sm-1'>
-                    <Image src="/icons/location.svg" className={styles["responsive-img"]} color='#000000' width={32} height={32} alt='location' />
-                    <span className={`${styles['responsive-text']}`} > Ömer Çolakoğlu Cad. R-Blok:2, 78600 Karıt/Safranbolu/Karabük</span>
-                </div>
-                <div style={{ width: "70%", height: "20%" }}>
-                    <Image
-                        src="/images/kapak_urunler.png"
-                        layout='responsive'
                         width={100}
                         height={100}
                         alt="kapak_urunler"
@@ -162,9 +186,11 @@ export default function Home() {
 
             {/*Ürünler*/}
             <header className='text-danger' style={{ textAlign: "center", fontSize: "24px", fontWeight: "bolder", marginTop: "30px" }}><span >Mezar Taşları</span></header>
-            <div className={`${styles['card-container']}`}>
+            <div className={`${styles['card-container']}`} style={windowWidth < 1200 ? { gap: "15px" } : { gap: "30px" }}>
                 {data.map((item, index) => (
-                    <div className={`card p-2 shadow ${styles['hover-card']}`} style={{ width: "20vw", minWidth: '150px', maxWidth: '300px' }} key={`card-image-${index}`}>
+                    <div className={`card p-2 shadow ${styles['hover-card']}`} style={{ width: "20vw", minWidth: '150px', maxWidth: '300px' }} key={`card-image-${index}`}
+                        onClick={() => openModal(`/images/mezarlar/${index + 1}.jpg`)}
+                    >
                         <Image
                             src={`/images/mezarlar/${index + 1}.jpg`}
                             style={{ width: '90%', height: '70%' }}
@@ -178,12 +204,17 @@ export default function Home() {
                             <a href="" className={`btn ps-1  ${styles['card-price-text']} `} style={{ borderRadius: "30px" }}><span className={`bg-white rounded-circle py-1 px-3 me-1`}>{item.mezar_num}</span>{item.mezar_price}TL</a>
                         </div>
                     </div>
-
                 ))}
             </div>
-
+            {currentImage && (
+                <ImageModal
+                    imgSrc={currentImage}
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                />
+            )}
             {/*İletişim*/}
-            <div className='d-flex flex-column container-fluid justify-content-center align-items-center gap-3 rounded  shadow mt-5' style={{ width: "50%", minWidth: "375px" }}>
+            <div className='d-flex flex-column container-fluid justify-content-center align-items-center gap-3 rounded  shadow mt-5' style={{ width: "50%", minWidth: "3px" }}>
                 <header className='row' style={{ fontSize: "24px", fontWeight: 'bold' }}>İletişim</header>
                 <div className='row'>
                     <ul>
@@ -231,10 +262,9 @@ export default function Home() {
             {/*Footer*/}
             <footer className={`navbar ${styles['footer-active']} ${!show && styles['footer-hidden']} `}>
                 <Image
-                    src="/images/alt_bilgi.png"
+                    src="/svg/footer.svg"
                     fill
                     alt="Footer"
-
                 />
             </footer>
         </main >
