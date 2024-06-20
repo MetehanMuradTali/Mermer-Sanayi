@@ -9,7 +9,7 @@ export default function Home() {
     const [data, setData] = useState([]);
     const [show, setShow] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowWidth, setWindowWidth] = useState(0);
 
     const controlNavbar = () => {
         if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
@@ -36,6 +36,7 @@ export default function Home() {
 
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
+        handleResize();
         window.addEventListener('resize', handleResize);
 
         // Cleanup on component unmount
