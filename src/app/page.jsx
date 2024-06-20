@@ -72,14 +72,14 @@ export default function Home() {
                 <div className={`${styles["nav-header"]} `}>
                     <Image
                         src="/images/logo.png"
-                        width={100}
-                        height={54}
+                        width={windowWidth < 700 ? 50 : 100}
+                        height={windowWidth < 700 ? 27 : 54}
                         alt="Logo"
                     />
 
                     <div className={`${styles["nav-header-name"]}`}>
-                        <span className='text-white' style={{ fontSize: '24px', fontWeight: 'bold', display: 'block', width: '100%' }}>Ramazan Mermer Sanayi</span>
-                        <span className='text-white' style={{ fontSize: '15px', fontStyle: 'italic', display: 'block', width: '100%' }}>Karabük'ün En Güvenilir Mermercisi</span>
+                        <span className={`${styles["nav-header-header"]}`}>Ramazan Mermer Sanayi</span>
+                        <span className={`${styles["nav-header-subheader"]}`}>Karabük'ün En Güvenilir Mermercisi</span>
                     </div>
 
                 </div>
@@ -121,10 +121,10 @@ export default function Home() {
 
                 <button
                     type="button"
-                    className={`btn btn-primary mb-3 ${styles["collapse"]} `}
+                    className={`btn btn-sm btn-primary mb-3 ${styles["collapse"]} `}
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    Çökebilir Menüyü Aç/Kapat
+                    Menü
                 </button>
             </nav>
 
