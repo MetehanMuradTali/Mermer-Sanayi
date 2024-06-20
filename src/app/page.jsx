@@ -83,7 +83,19 @@ export default function Home() {
     useEffect(() => {
         Modal.setAppElement('body');
     }, []);
-
+    /*<Image
+                    src="/images/dukkan.jpg"
+                    alt="kapak"
+                    sizes="50%"
+                    style={{
+                        width: '100%',
+                        height: "auto"
+                    }}
+                    width={500}
+                    height={300}
+                    quality={100}
+                    className="d-block w-100"
+                />*/
     return (
         <main className={`gx-0 ${styles["main"]}`} style={{ position: 'absolute' }}>
 
@@ -148,20 +160,65 @@ export default function Home() {
             </nav>
 
             {/*Giriş*/}
-            <div className='d-flex flex-column align-items-center' style={{ width: "100%", height: "100%" }} >
-                <div className={styles["introduction"]} style={windowWidth < 600 ? { height: "40vh" } : { height: "70vh" }}>
-                    <Image
-                        src="/images/dukkan.jpg"
-                        alt="kapak"
-                        sizes="50%"
-                        style={{
-                            width: '100%',
-                            height: "auto"
-                        }}
-                        width={500}
-                        height={300}
-                        quality={100}
-                    />
+            <div className='d-flex flex-column align-items-center' data-bs-ride="carousel" style={{ width: "100%", height: "100%" }} >
+                <div id="carouselExampleIndicators" className="carousel slide w-100 mt-5" style={windowWidth < 600 ? { height: "40vh" } : { height: "70vh" }}>
+                    <div className="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div className="carousel-inner" style={{ height: "100%" }}>
+                        <div className="carousel-item active" style={{ width: "100%", height: "100%" }}>
+                            <Image
+                                src="/images/dukkan.jpg"
+                                alt="kapak"
+                                sizes="100%"
+                                style={{
+                                    width: '100%',
+                                    height: "100%"
+                                }}
+                                width={500}
+                                height={300}
+                                quality={100}
+                            />
+                        </div>
+                        <div className="carousel-item" style={{ width: "100%", height: "100%" }}>
+                            <Image
+                                src="/images/dukkan.jpg"
+                                alt="kapak"
+                                sizes="100%"
+                                style={{
+                                    width: '100%',
+                                    height: "100%"
+                                }}
+                                width={500}
+                                height={300}
+                                quality={100}
+                            />
+                        </div>
+                        <div className="carousel-item" style={{ width: "100%", height: "100%" }} >
+                            <Image
+                                src="/images/dukkan.jpg"
+                                alt="kapak"
+                                sizes="100%"
+                                style={{
+                                    width: '100%',
+                                    height: "100%"
+                                }}
+                                width={500}
+                                height={300}
+                                quality={100}
+                            />
+                        </div>
+                    </div>
+                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                    </button>
                 </div>
 
                 <div className='my-1' style={{ textAlign: 'center' }}>
@@ -206,15 +263,17 @@ export default function Home() {
                     </div>
                 ))}
             </div>
-            {currentImage && (
-                <ImageModal
-                    imgSrc={currentImage}
-                    isOpen={modalIsOpen}
-                    onRequestClose={closeModal}
-                />
-            )}
+            {
+                currentImage && (
+                    <ImageModal
+                        imgSrc={currentImage}
+                        isOpen={modalIsOpen}
+                        onRequestClose={closeModal}
+                    />
+                )
+            }
             {/*İletişim*/}
-            <div className='d-flex flex-column container-fluid justify-content-center align-items-center gap-3 rounded  shadow mt-5' style={{ width: "50%", minWidth: "3px" }}>
+            <div className='d-flex flex-column container-fluid justify-content-center align-items-center gap-3 rounded  shadow mt-5' style={{ width: "50%", minWidth: "350px" }}>
                 <header className='row' style={{ fontSize: "24px", fontWeight: 'bold' }}>İletişim</header>
                 <div className='row'>
                     <ul>
@@ -262,7 +321,7 @@ export default function Home() {
             {/*Footer*/}
             <footer className={`navbar ${styles['footer-active']} ${!show && styles['footer-hidden']} `}>
                 <Image
-                    src="/svg/footer.svg"
+                    src="/svg/footer2.svg"
                     fill
                     alt="Footer"
                 />
