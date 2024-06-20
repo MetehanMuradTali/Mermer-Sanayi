@@ -66,7 +66,7 @@ export default function Home() {
     }, []); // Boş bağımlılık dizisi ile sadece bir kez çalıştırılır
 
     return (
-        <main style={{ position: 'absolute' }} className='gx-0'>
+        <main className={`gx-0 ${styles["main"]}`} style={{ position: 'absolute' }}>
 
             <nav className={` ${styles['nav-active']} ${show && styles['nav-hidden']}`}>
                 <div className={`${styles["nav-header"]} `}>
@@ -112,15 +112,15 @@ export default function Home() {
                             !isOpen && windowWidth >= 1200 ? { display: "flex" } :
                                 !isOpen && windowWidth < 1200 ? { display: "none" } :
                                     { display: "flex" }} >
-                    <a className={`${styles["nav-last-link"]}`}>
+                    <a className={`${styles["nav-last-link"]}`} href='https://www.facebook.com/groups/912273898899478?locale=tr_TR' target='_blank'>
                         <span style={{ color: 'blue' }}>Facebook</span>
                         <img src="/icons/facebook.svg" width="32" height="32" alt='facebook' />
                     </a>
-                    <a className={`${styles["nav-last-link"]}`}>
+                    <a className={`${styles["nav-last-link"]}`} href='https://www.instagram.com/rmzmermer/' target='_blank'>
                         <span style={{ color: 'orange' }}>İnstagram</span>
                         <img src="/icons/instagram.svg" width="32" height="32" alt='instagram' />
                     </a>
-                    <a className={`${styles["nav-last-link"]}`}>
+                    <a className={`${styles["nav-last-link"]}`} href='https://api.whatsapp.com/send/?phone=905423189711&text&type=phone_number&app_absent=0' target='_blank'>
                         <span style={{ color: 'green' }}>Whatsapp</span>
                         <img src="/icons/whatsapp.svg" width="32" height="32" alt='whatsapp' />
                     </a>
@@ -128,13 +128,8 @@ export default function Home() {
                 </div>
             </nav>
 
-
-
-
-
-
             {/*Giriş*/}
-            <div className='d-flex flex-column bg-primary  align-items-center' style={{ width: "100%", height: "60%" }}>
+            <div className='d-flex flex-column align-items-center' style={{ width: "100%", height: "60%" }}>
                 <div style={{ width: "100%", height: "100%", position: "relative", display: "flex", justifyContent: "center", paddingRight: "1%" }}>
                     <Image
                         src="/images/kapak.png"
@@ -150,9 +145,9 @@ export default function Home() {
                     />
                 </div>
 
-                <div className='my-sm-3'>
+                <div className='my-sm-1'>
                     <Image src="/icons/location.svg" className={styles["responsive-img"]} color='#000000' width={32} height={32} alt='location' />
-                    <span className={`text-white ${styles['responsive-text']}`} > Ömer Çolakoğlu Cad. R-Blok:2, 78600 Karıt/Safranbolu/Karabük</span>
+                    <span className={`${styles['responsive-text']}`} > Ömer Çolakoğlu Cad. R-Blok:2, 78600 Karıt/Safranbolu/Karabük</span>
                 </div>
                 <div style={{ width: "70%", height: "20%" }}>
                     <Image
@@ -166,10 +161,10 @@ export default function Home() {
             </div>
 
             {/*Ürünler*/}
-            <header className='text-danger' style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold", marginTop: "30px" }}><span >Mezar Taşları</span></header>
+            <header className='text-danger' style={{ textAlign: "center", fontSize: "24px", fontWeight: "bolder", marginTop: "30px" }}><span >Mezar Taşları</span></header>
             <div className={`${styles['card-container']}`}>
                 {data.map((item, index) => (
-                    <div className={`card figure p-2 shadow ${styles['hover-card']}`} style={{ width: "20vw", minWidth: '150px', maxWidth: '300px' }} key={`card-image-${index}`}>
+                    <div className={`card p-2 shadow ${styles['hover-card']}`} style={{ width: "20vw", minWidth: '150px', maxWidth: '300px' }} key={`card-image-${index}`}>
                         <Image
                             src={`/images/mezarlar/${index + 1}.jpg`}
                             style={{ width: '90%', height: '70%' }}
@@ -180,7 +175,7 @@ export default function Home() {
                         />
                         <div className="card-body">
                             <h5 className={`card-title ${styles['card-text']}`}>{item.mezar_name}</h5>
-                            <a href="" className={`btn btn-primary ps-1  ${styles['card-price-text']} `} style={{ borderRadius: "30px" }}><span className={`text-white bg-danger rounded-circle py-1 px-3 me-1`}>{item.mezar_num}</span>{item.mezar_price}TL</a>
+                            <a href="" className={`btn ps-1  ${styles['card-price-text']} `} style={{ borderRadius: "30px" }}><span className={`bg-white rounded-circle py-1 px-3 me-1`}>{item.mezar_num}</span>{item.mezar_price}TL</a>
                         </div>
                     </div>
 
@@ -188,7 +183,7 @@ export default function Home() {
             </div>
 
             {/*İletişim*/}
-            <div className='d-flex flex-column container-fluid justify-content-center align-items-center gap-3 rounded  shadow mt-2' style={{ width: "50%", minWidth: "375px" }}>
+            <div className='d-flex flex-column container-fluid justify-content-center align-items-center gap-3 rounded  shadow mt-5' style={{ width: "50%", minWidth: "375px" }}>
                 <header className='row' style={{ fontSize: "24px", fontWeight: 'bold' }}>İletişim</header>
                 <div className='row'>
                     <ul>
@@ -205,16 +200,16 @@ export default function Home() {
                         </div>
                         <div>
                             <div className='d-flex flex-row'>
-                                <a className='me-3 text-primary' style={{ textDecoration: "none", color: "blue" }} href=''>
+                                <a className='me-3 text-primary' style={{ textDecoration: "none", color: "blue" }} href='https://www.facebook.com/groups/912273898899478?locale=tr_TR' target='_blank'>
                                     <img src="/icons/facebook.svg" color='' width="32" height="32" alt='facebook' />
                                     <span>Facebook</span>
                                 </a>
-                                <a className='me-3 text-warning' style={{ textDecoration: "none" }} href=''>
-                                    <img src="/icons/instagram.svg" width="32" height="32" alt='facebook' />
+                                <a className='me-3 text-warning' style={{ textDecoration: "none" }} href='https://www.instagram.com/rmzmermer/' target='_blank'>
+                                    <img src="/icons/instagram.svg" width="32" height="32" alt='instagram' />
                                     <span>İnstagram</span>
                                 </a>
-                                <a className='me-3 text-success' style={{ textDecoration: "none" }} href=''>
-                                    <img src="/icons/whatsapp.svg" width="32" height="32" alt='facebook' />
+                                <a className='me-3 text-success' style={{ textDecoration: "none" }} href='https://api.whatsapp.com/send/?phone=905423189711&text&type=phone_number&app_absent=0' target='_blank'>
+                                    <img src="/icons/whatsapp.svg" width="32" height="32" alt='whatsapp' />
                                     <span>Whatsapp</span>
                                 </a>
                             </div>
@@ -224,7 +219,7 @@ export default function Home() {
             </div>
 
             {/*Google Map*/}
-            <div className='d-flex flex-column container-fluid  align-items-center gap-3 rounded  shadow mt-5 mx-1 pt-3' style={{ width: "90%", height: "40vh" }}>
+            <div className='d-flex flex-column container-fluid  justify-content-center align-items-center gap-3 rounded  shadow mt-5 pt-3' style={{ width: "80%", height: "40vh" }}>
                 <header className='d-flex flex-col align-items-center'>
                     <img src="/icons/location_dark.svg" color='' width="32" height="32" alt='facebook' />
                     <span style={{ fontSize: "24px", fontWeight: 'bold' }}>Harita Üzerinde Yerimiz</span>

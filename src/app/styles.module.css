@@ -1,5 +1,6 @@
 .main {
-    --bs-gutter-x: 0;
+    position: absolute;
+    background-color: #bdcdff;
 }
 
 .nav-active {
@@ -7,7 +8,7 @@
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
-    background-color: lightblue;
+    background-color: #9eb6ff;
     top: 0;
     z-index: 10;
     position: fixed;
@@ -38,10 +39,10 @@
 
 .nav-header-header {
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: bolder;
     display: block;
     width: 100%;
-    color: white
+    color: #FFFFFF;
 }
 
 .nav-header-subheader {
@@ -149,31 +150,49 @@
     justify-content: center;
     align-items: center;
     gap: 40px;
+    perspective: 900px;
 }
 
 .hover-card {
+    background: linear-gradient(#9eb6ff,
+            #a1b9ff,
+            #a5bbff,
+            #a8beff,
+            #acc0ff,
+            #afc3ff,
+            #b3c5ff,
+            #b6c8ff,
+            #bacaff,
+            #bdcdff);
+    ;
+    border: none;
     transition: transform 300ms;
     display: flex;
     align-items: center;
+
 }
 
 .hover-card:hover {
-    transform: scale(1.05);
+    transform: rotateX(3deg) translateY(-5px) translateZ(2px);
 }
 
 .responsive-text {
     font-size: 1.5rem;
     /* Varsayılan boyut */
+    color: whitesmoke;
+
 }
 
 .card-text {
     font-size: 1.4rem;
+    color: #FFFFFF;
     /* Varsayılan boyut */
 }
 
 .card-price-text {
     font-size: 1.2rem;
     /* Varsayılan boyut */
+    background-color: #9eb6ff;
 }
 
 
