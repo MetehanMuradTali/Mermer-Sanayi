@@ -134,7 +134,7 @@ export default function Home() {
 
 
             {/*Giriş*/}
-            <div className='d-flex flex-column bg-primary  align-items-center' style={{ paddingTop: "65px", width: "100%", height: "60%" }}>
+            <div className='d-flex flex-column bg-primary  align-items-center' style={{ width: "100%", height: "60%" }}>
                 <div style={{ width: "100%", height: "100%", position: "relative", display: "flex", justifyContent: "center", paddingRight: "1%" }}>
                     <Image
                         src="/images/kapak.png"
