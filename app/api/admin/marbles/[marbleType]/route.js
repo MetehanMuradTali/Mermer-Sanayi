@@ -20,7 +20,7 @@ export async function GET(request, { params }) {
             branches: [
               { case: { $eq: ["$marbleType", "DÜZ MEZAR"] },  then: 1 },
               { case: { $eq: ["$marbleType", "BABALI MEZAR"] }, then: 2 },
-              { case: { $eq: ["$marbleType", "ÇİFTLi MEZAR"] }, then: 3 },
+              { case: { $eq: ["$marbleType", "ÇİFTLİ MEZAR"] }, then: 3 },
               { case: { $eq: ["$marbleType", "BEBEK MEZARI"] }, then: 4 },
               { case: { $eq: ["$marbleType", "ÇEŞME"] }, then: 5 },
 
