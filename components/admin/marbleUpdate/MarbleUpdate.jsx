@@ -22,6 +22,7 @@ const MarbleUpdate = () => {
         fetch(`/api/admin/marbles/${marbleType}`, {cache:"no-store"})
             .then(async (res) => await res.json())
             .then(async (data) => {
+                data.marbles.sort((a,b)=> a.displayNumber - b.displayNumber)
                 setMarbleList({ marbles: data.marbles,status: "finished" })
             }).catch((error)=>{
                 console.log("errrorr ==> ", error);

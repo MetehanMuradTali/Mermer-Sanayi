@@ -5,56 +5,68 @@ import { MarbleModel } from "@/config/models/marbleModel";
 const LoadDB = async () => {
     await ConnectDb();
 }
-
 export async function GET(request, { params }) {
-    console.log("Marble List GET HIT");
-    await LoadDB();
-    const params2 = await params
-    const marbleType = await params2.marbleType;
-    const marbles = await MarbleModel.aggregate([
-       // 1) categoryOrder üret (marbleType -> sıra)
+  console.log("Marble List GET HIT");
+  await LoadDB();
+
+  const marbleType = params.marbleType; // params içinden alıyoruz
+
+  const marbles = await MarbleModel.aggregate([
+    // İlgili türü filtrele
+    
+
+    // 1) categoryOrder üret (marbleType -> sıra)
     {
       $addFields: {
         categoryOrder: {
           $switch: {
             branches: [
-              { case: { $eq: ["$marbleType", "DÜZ MEZAR"] },  then: 1 },
+              { case: { $eq: ["$marbleType", "DÜZ MEZAR"] }, then: 1 },
               { case: { $eq: ["$marbleType", "BABALI MEZAR"] }, then: 2 },
               { case: { $eq: ["$marbleType", "ÇİFTLİ MEZAR"] }, then: 3 },
               { case: { $eq: ["$marbleType", "BEBEK MEZARI"] }, then: 4 },
               { case: { $eq: ["$marbleType", "ÇEŞME"] }, then: 5 },
-
               // diğer türler...
             ],
-            default: 999
-          }
+            default: 999,
+          },
         },
         // createdAt yoksa _id zamanını kullan
-        _sortCreatedAt: { $ifNull: ["$createdAt", { $toDate: "$_id" }] }
-      }
+        _sortCreatedAt: { $ifNull: ["$createdAt", { $toDate: "$_id" }] },
+      },
     },
 
-    // 2) Tek alanlı bileşik anahtar
-    { $addFields: { _sortKey: ["$categoryOrder", "$_sortCreatedAt", "$_id"] } },
-    
-    // 3) Window: tek alanlı sortBy zorunluluğunu sağla
+    // 2) Tek alanlı bileşik anahtar (string halinde)
+    {
+      $addFields: {
+        _sortKey: {
+          $concat: [
+            { $toString: "$categoryOrder" }, "_",
+            { $toString: "$marblePrice"} , "-",
+            { $toString: "$_id" },
+          ],
+        },
+      },
+    },
+
+    // 3) Window: sıra numarası üret
     {
       $setWindowFields: {
-        sortBy: { _sortKey: 1 },          // <-- tek alan
-        output: { displayNumber: { $documentNumber: {} } }
-      }
+        sortBy: { _sortKey: 1 },
+        output: { displayNumber: { $documentNumber: {} } },
+      },
     },
     { $match: { marbleType } },
-    // 4) Çıkışı da aynı sırada döndürmek için sırala (opsiyonel ama pratik)
+    
+    // 4) Çıkışı sıralı döndür
     { $sort: { _sortKey: 1 } },
 
     // 5) Geçici alanları temizle
-    { $project: { _sortKey: 0, _sortCreatedAt: 0 } }
-    ]);
-    
-    console.log("marbles=>  " , marbles);
-    
-    return NextResponse.json({ marbles });
+    { $project: { _sortKey: 0, _sortCreatedAt: 0 } },
+  ]);
+
+  console.log("marbles =>", marbles);
+  return NextResponse.json({ marbles });
 }
 
 /*export async function GET(request, { params }) {
